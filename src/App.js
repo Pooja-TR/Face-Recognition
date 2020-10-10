@@ -1,4 +1,4 @@
-import React , { Component }from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Logo from './Components/Logo/Logo'
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm'
@@ -8,22 +8,22 @@ import Clarifai from 'clarifai';
 
 const app = new Clarifai.App({
   apiKey: 'abcfb6cf0b32454dbb2bf0db2f8f0eb5'
- });
-const particlesOptions ={
-  particles : {
-    number:{
-      value:50,
+});
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 50,
       density: {
-        enable:true,
-        value_area :800,
+        enable: true,
+        value_area: 800,
       }
     },
-    line_linked : {
-      colour:'black',
-      shadow : {
-        enable:true,
+    line_linked: {
+      colour: 'black',
+      shadow: {
+        enable: true,
         colour: "Black",
-        blur:5
+        blur: 5
       }
     }
   }
@@ -31,13 +31,12 @@ const particlesOptions ={
 
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.state ={
+    this.state = {
       input: '',
-      imageUrl:'',
-      box:{},
-      route: 'signin'
+      imageUrl: '',
+      box: {}
     }
   }
   calculateFaceLocation = (data) => {
@@ -54,48 +53,39 @@ class App extends Component {
   }
 
   displayFaceBox = (box) => {
-    this.setState({box: box});
+    this.setState({ box: box });
   }
 
   onInputChange = (event) => {
-    this.setState({input :event.target.value})
+    this.setState({ input: event.target.value })
   }
 
-  onSubmit =() => {
+  onSubmit = () => {
     this.setState({
-      imageUrl:this.state.input
+      imageUrl: this.state.input
     })
     app.models.predict(
       Clarifai.FACE_DETECT_MODEL,
       this.state.input)
-     .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
-     .catch(err => console.log(err));
+      .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+      .catch(err => console.log(err));
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="App">
-          <Particles className='particles'
-            params={particlesOptions}
-          />
-          <Logo />
-          <ImageLinkForm 
-              onInputChange={this.onInputChange} 
-              onSubmit ={this.onSubmit}
-          />
-          <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
-        </div>
+        <Particles className='particles'
+          params={particlesOptions}
+        />
+        <Logo />
+        <ImageLinkForm
+          onInputChange={this.onInputChange}
+          onSubmit={this.onSubmit}
+        />
+        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
+      </div>
     );
   }
 }
 
 export default App;
-
-
-
-// top: 0.319437px;
-// right: 222.862px;
-// bottom: 43.1447px;
-// left: 4.12304px;
-
-

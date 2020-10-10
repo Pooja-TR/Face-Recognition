@@ -3,11 +3,11 @@ import Tilt from 'react-tilt';
 import './Logo.css';
 import faceRecog from './FaceRecogLogo.png'
 const Logo = () => {
-    return(
+    return (
         <div className="ma4 mt0">
-            <Tilt className="Tilt br2 shadow-2" options={{ max : 55 }} style={{ height: 150, width: 150 }} >
+            <Tilt className="Tilt br2 shadow-2" options={{ max: 55 }} style={{ height: 150, width: 150 }} >
                 <div className="Tilt-inner pa3">
-                    <img style={{padding : '5px'}} alt='logo' src={faceRecog} />
+                    <img style={{ padding: '5px' }} alt='logo' src={faceRecog} />
                 </div>
             </Tilt>
         </div>
